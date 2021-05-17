@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.ErrorMapper">
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Error">
+		<!--@mbg.generated-->
+		<!--@Table ERROR-->
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="ERROR" jdbcType="LONGVARCHAR" property="error"/>
+		<result column="TYPE" jdbcType="CHAR" property="type"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		ID, ERROR, `TYPE`
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from ERROR
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from ERROR
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Error" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into ERROR (ERROR, `TYPE`)
+		values (#{error,jdbcType=LONGVARCHAR}, #{type,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Error" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into ERROR
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="error != null">
+				ERROR,
+			</if>
+			<if test="type != null">
+				`TYPE`,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="error != null">
+				#{error,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Error">
+		<!--@mbg.generated-->
+		update ERROR
+		<set>
+			<if test="error != null">
+				ERROR = #{error,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				`TYPE` = #{type,jdbcType=CHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Error">
+		<!--@mbg.generated-->
+		update ERROR
+		set ERROR  = #{error,jdbcType=LONGVARCHAR},
+		    `TYPE` = #{type,jdbcType=CHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getRandErrorByType" resultMap="BaseResultMap">
+		SELECT t1.ID,
+		       t1.ERROR,
+		       t1.TYPE
+		FROM ERROR AS t1
+				     JOIN (
+				SELECT ROUND(
+						       RAND() * ((
+								                 SELECT MAX(ID)
+								                 FROM `ERROR`
+								                 ) - (
+								                 SELECT MIN(ID)
+								                 FROM ERROR
+								                 )) + (
+								       SELECT MIN(ID)
+								       FROM ERROR
+								       )) AS ID
+				) AS t2
+		WHERE t1.ID >= t2.ID
+		  and TYPE = #{type}
+		ORDER BY t1.ID
+		LIMIT 1
+	</select>
+</mapper>

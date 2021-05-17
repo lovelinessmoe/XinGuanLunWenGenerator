@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.ConclusionMapper">
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Conclusion">
+		<!--@mbg.generated-->
+		<!--@Table CONCLUSION-->
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="CONCLUSION" jdbcType="LONGVARCHAR" property="conclusion"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		ID, CONCLUSION
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from CONCLUSION
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from CONCLUSION
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Conclusion" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into CONCLUSION (CONCLUSION)
+		values (#{conclusion,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Conclusion" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into CONCLUSION
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="conclusion != null">
+				CONCLUSION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="conclusion != null">
+				#{conclusion,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Conclusion">
+		<!--@mbg.generated-->
+		update CONCLUSION
+		<set>
+			<if test="conclusion != null">
+				CONCLUSION = #{conclusion,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Conclusion">
+		<!--@mbg.generated-->
+		update CONCLUSION
+		set CONCLUSION = #{conclusion,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getConclusion" resultMap="BaseResultMap">
+		SELECT *
+		FROM CONCLUSION AS t1
+				     JOIN (
+				SELECT ROUND(
+						       RAND() * ((
+								                 SELECT MAX(ID)
+								                 FROM `CONCLUSION`
+								                 ) - (
+								                 SELECT MIN(ID)
+								                 FROM CONCLUSION
+								                 )) + (
+								       SELECT MIN(ID)
+								       FROM CONCLUSION
+								       )) AS ID
+				) AS t2
+		WHERE t1.ID >= t2.ID
+		ORDER BY t1.ID
+		LIMIT 1
+	</select>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.SubargumentMapper">
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Subargument">
+		<!--@mbg.generated-->
+		<!--@Table SUBARGUMENT-->
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="TYPE" jdbcType="CHAR" property="type"/>
+		<result column="SUBARG" jdbcType="INTEGER" property="subarg"/>
+		<result column="Content" jdbcType="LONGVARCHAR" property="content"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		ID, `TYPE`, SUBARG, Content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from SUBARGUMENT
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from SUBARGUMENT
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Subargument" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into SUBARGUMENT (`TYPE`, SUBARG, Content)
+		values (#{type,jdbcType=CHAR}, #{subarg,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Subargument" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into SUBARGUMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="type != null">
+				`TYPE`,
+			</if>
+			<if test="subarg != null">
+				SUBARG,
+			</if>
+			<if test="content != null">
+				Content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+			<if test="subarg != null">
+				#{subarg,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Subargument">
+		<!--@mbg.generated-->
+		update SUBARGUMENT
+		<set>
+			<if test="type != null">
+				`TYPE` = #{type,jdbcType=CHAR},
+			</if>
+			<if test="subarg != null">
+				SUBARG = #{subarg,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				Content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Subargument">
+		<!--@mbg.generated-->
+		update SUBARGUMENT
+		set `TYPE`  = #{type,jdbcType=CHAR},
+		    SUBARG  = #{subarg,jdbcType=INTEGER},
+		    Content = #{content,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getRandSubArgByTypeAndSub" resultMap="BaseResultMap">
+		SELECT t1.ID,
+		       TYPE,
+		       SUBARG,
+		       Content
+		FROM SUBARGUMENT AS t1
+				     JOIN (
+				SELECT ROUND(
+						       RAND() * ((
+								                 SELECT MAX(ID)
+								                 FROM `SUBARGUMENT`
+								                 ) - (
+								                 SELECT MIN(ID)
+								                 FROM SUBARGUMENT
+								                 )) + (
+								       SELECT MIN(ID)
+								       FROM SUBARGUMENT
+								       )) AS ID
+				) AS t2
+		WHERE t1.ID >= t2.ID
+		  and t1.TYPE = #{type}
+		  and t1.SUBARG = #{subarg}
+		ORDER BY t1.ID
+		LIMIT 1
+	</select>
+</mapper>

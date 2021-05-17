@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.ProjectMapper">
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Project">
+		<!--@mbg.generated-->
+		<!--@Table Project-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="title" jdbcType="CHAR" property="title"/>
+		<result column="start" jdbcType="LONGVARCHAR" property="start"/>
+		<result column="mid" jdbcType="LONGVARCHAR" property="mid"/>
+		<result column="end" jdbcType="LONGVARCHAR" property="end"/>
+		<result column="xiangMuType" jdbcType="CHAR" property="xiangmutype"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, title, `start`, mid, `end`, xiangMuType
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from Project
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from Project
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="id" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Project" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into Project (title, `start`, mid,
+		                     `end`, xiangMuType)
+		values (#{title,jdbcType=CHAR}, #{start,jdbcType=LONGVARCHAR}, #{mid,jdbcType=LONGVARCHAR},
+		        #{end,jdbcType=LONGVARCHAR}, #{xiangmutype,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="id" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Project" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into Project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				title,
+			</if>
+			<if test="start != null">
+				`start`,
+			</if>
+			<if test="mid != null">
+				mid,
+			</if>
+			<if test="end != null">
+				`end`,
+			</if>
+			<if test="xiangmutype != null">
+				xiangMuType,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				#{title,jdbcType=CHAR},
+			</if>
+			<if test="start != null">
+				#{start,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="mid != null">
+				#{mid,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="end != null">
+				#{end,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="xiangmutype != null">
+				#{xiangmutype,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Project">
+		<!--@mbg.generated-->
+		update Project
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=CHAR},
+			</if>
+			<if test="start != null">
+				`start` = #{start,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="mid != null">
+				mid = #{mid,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="end != null">
+				`end` = #{end,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="xiangmutype != null">
+				xiangMuType = #{xiangmutype,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Project">
+		<!--@mbg.generated-->
+		update Project
+		set title       = #{title,jdbcType=CHAR},
+		    `start`     = #{start,jdbcType=LONGVARCHAR},
+		    mid         = #{mid,jdbcType=LONGVARCHAR},
+		    `end`       = #{end,jdbcType=LONGVARCHAR},
+		    xiangMuType = #{xiangmutype,jdbcType=CHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getProject" resultMap="BaseResultMap">
+		select id, title, start, mid, end, xiangMuType
+		from Project
+		where xiangMuType = #{xiangMu,jdbcType=VARCHAR}
+		limit 1
+	</select>
+</mapper>

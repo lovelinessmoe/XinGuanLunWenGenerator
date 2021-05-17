@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/layui-v2.5.5/css/layui.css" media="all">
+</head>
+<body>
+<div>
+    <form action="" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <div>
+                    <select name="type">
+                        <option value="Range">范围</option>
+                        <option value="SpeedOfProgress">进度</option>
+                        <option value="Quality">质量</option>
+                        <option value="HumanResources">人力</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div>
+                    <select name="xiangmuType">
+                        <option value="HealthCode">健康码</option>
+                        <option value="Metro">地铁</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <button class="layui-btn" lay-filter="submit" lay-submit="">查找</button>
+                <button class="layui-btn layui-btn-normal" type="reset">重置</button>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+</body>
+
+<script charset="utf-8" src="lib/layui-v2.5.5/layui.js"></script>
+<script src="js/lay-config.js"></script>
+
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+
+        form.on('submit(submit)', function (data) {
+            data = data.field;
+            console.log(data);
+            $.post(layui.api.api + "submit", data, function (res) {
+                layer.msg(res.msg);
+                return false;
+            });
+            return false;
+        });
+    });
+</script>
+</html>
