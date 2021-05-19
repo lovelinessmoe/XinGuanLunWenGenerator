@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.FixupMapper">
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Fixup">
+		<!--@mbg.generated-->
+		<!--@Table FIXUP-->
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="FIXUP" jdbcType="LONGVARCHAR" property="fixup"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		ID, FIXUP
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from FIXUP
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from FIXUP
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Fixup" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into FIXUP (FIXUP)
+		values (#{fixup,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Fixup" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into FIXUP
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fixup != null">
+				FIXUP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fixup != null">
+				#{fixup,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Fixup">
+		<!--@mbg.generated-->
+		update FIXUP
+		<set>
+			<if test="fixup != null">
+				FIXUP = #{fixup,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Fixup">
+		<!--@mbg.generated-->
+		update FIXUP
+		set FIXUP = #{fixup,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getRandFixUp" resultMap="BaseResultMap">
+		SELECT t1.ID,
+		       t1.FIXUP,
+		       t1.TYPE
+		FROM FIXUP AS t1
+				     JOIN (
+				SELECT ROUND(
+						       RAND() * ((
+								                 SELECT MAX(ID)
+								                 FROM `FIXUP`
+								                 ) - (
+								                 SELECT MIN(ID)
+								                 FROM FIXUP
+								                 )) + (
+								       SELECT MIN(ID)
+								       FROM FIXUP
+								       )) AS ID
+				) AS t2
+		WHERE t1.ID >= t2.ID
+		ORDER BY t1.ID
+		LIMIT 1
+	</select>
+</mapper>
