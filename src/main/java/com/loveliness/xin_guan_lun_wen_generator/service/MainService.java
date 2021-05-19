@@ -7,6 +7,7 @@ import com.loveliness.xin_guan_lun_wen_generator.mapper.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 import static com.loveliness.xin_guan_lun_wen_generator.controller.MainControllter.sumLunWen;
 
@@ -128,12 +129,22 @@ public class MainService {
         //FIXUP
         Fixup randFixUpByType = null;
         while (randFixUpByType == null) {
-            randFixUpByType = fixupMapper.getRandFixUpByType(type);
+            randFixUpByType = fixupMapper.getRandFixUp();
         }
         sumLunWen = sumLunWen.replace("FIXUP", randFixUpByType.getFixup());
         //CONCLUSION
         Conclusion conclusion = conclusionMapper.getConclusion();
         sumLunWen = sumLunWen.replace("CONCLUSION", conclusion.getConclusion());
         return sumLunWen;
+    }
+
+    public List<Project> getXiangMu() {
+        List<Project> allProject = projectMapper.getAllProject();
+        return allProject;
+    }
+
+    public List<Argument> getType() {
+        List<Argument> type = argumentMapper.getType();
+        return type;
     }
 }

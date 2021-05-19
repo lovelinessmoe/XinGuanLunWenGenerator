@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="lib/layui-v2.5.5/css/layui.css" media="all">
+    <link href="lib/layui-v2.5.5/css/layui.css" media="all" rel="stylesheet">
 </head>
 <body>
 <div>
@@ -11,19 +11,19 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <div>
-                    <select name="type">
-                        <option value="Range">范围</option>
-                        <option value="SpeedOfProgress">进度</option>
-                        <option value="Quality">质量</option>
-                        <option value="HumanResources">人力</option>
+                    <select id="type" name="type">
+                        <!--<option value="Range">范围</option>-->
+                        <!--<option value="SpeedOfProgress">进度</option>-->
+                        <!--<option value="Quality">质量</option>-->
+                        <!--<option value="HumanResources">人力</option>-->
                     </select>
                 </div>
             </div>
             <div class="layui-inline">
                 <div>
-                    <select name="xiangmuType">
-                        <option value="HealthCode">健康码</option>
-                        <option value="Metro">地铁</option>
+                    <select id="xiangmuType" name="xiangmuType">
+                        <!--<option value="HealthCode">健康码</option>-->
+                        <!--<option value="Metro">地铁</option>-->
                     </select>
                 </div>
             </div>
@@ -33,6 +33,8 @@
                 <button class="layui-btn layui-btn-normal" type="reset">重置</button>
             </div>
 
+
+            <textarea class="layui-textarea" id="page" required></textarea>
 
         </div>
     </form>
@@ -55,10 +57,49 @@
             console.log(data);
             $.post(layui.api.api + "submit", data, function (res) {
                 layer.msg(res.msg);
+                $("#page").append(res.data);
                 return false;
             });
             return false;
         });
+
+
+        /**
+         * 获取论文列表
+         */
+        $.ajax({
+            url: layui.api.api + 'getXiangMu',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data.data, function (index, item) {
+                    console.log(item);
+                    $('#xiangmuType').append(new Option(item.title, item.xiangmutype));
+                    // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+            }
+        });
+
+
+        /**
+         * 获取项目类型列表
+         */
+        $.ajax({
+            url: layui.api.api + 'getType',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data.data, function (index, item) {
+                    console.log(item);
+                    $('#type').append(new Option(item.val, item.type));
+                    // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+            }
+        });
+
+
     });
 </script>
 </html>

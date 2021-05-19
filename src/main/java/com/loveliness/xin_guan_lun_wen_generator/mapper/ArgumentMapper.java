@@ -2,6 +2,8 @@ package com.loveliness.xin_guan_lun_wen_generator.mapper;
 
 import com.loveliness.xin_guan_lun_wen_generator.entity.Argument;
 
+import java.util.List;
+
 /**
  * @author loveliness
  * @create 2021-05-17 22:17
@@ -21,4 +23,6 @@ public interface ArgumentMapper {
     int updateByPrimaryKey(Argument record);
 
     Argument getArgunmentByType(String type);
+
+    List<Argument> getType();
 }

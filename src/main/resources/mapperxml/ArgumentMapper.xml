@@ -1,91 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.loveliness.xin_guan_lun_wen_generator.mapper.ArgumentMapper">
-  <resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
-    <!--@mbg.generated-->
-    <!--@Table ARGUMENT-->
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="ARGUMENT" jdbcType="LONGVARCHAR" property="argument" />
-    <result column="TYPE" jdbcType="CHAR" property="type" />
-    <result column="VAL" jdbcType="CHAR" property="val" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    ID, ARGUMENT, `TYPE`, VAL
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select
-    <include refid="Base_Column_List" />
-    from ARGUMENT
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated-->
-    delete from ARGUMENT
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into ARGUMENT (ARGUMENT, `TYPE`, VAL
-      )
-    values (#{argument,jdbcType=LONGVARCHAR}, #{type,jdbcType=CHAR}, #{val,jdbcType=CHAR}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into ARGUMENT
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="argument != null">
-        ARGUMENT,
-      </if>
-      <if test="type != null">
-        `TYPE`,
-      </if>
-      <if test="val != null">
-        VAL,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="argument != null">
-        #{argument,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=CHAR},
-      </if>
-      <if test="val != null">
-        #{val,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
-    <!--@mbg.generated-->
-    update ARGUMENT
-    <set>
-      <if test="argument != null">
-        ARGUMENT = #{argument,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="type != null">
-        `TYPE` = #{type,jdbcType=CHAR},
-      </if>
-      <if test="val != null">
-        VAL = #{val,jdbcType=CHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
-    <!--@mbg.generated-->
-    update ARGUMENT
-    set ARGUMENT = #{argument,jdbcType=LONGVARCHAR},
-      `TYPE` = #{type,jdbcType=CHAR},
-      VAL = #{val,jdbcType=CHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
+		<!--@mbg.generated-->
+		<!--@Table ARGUMENT-->
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="ARGUMENT" jdbcType="LONGVARCHAR" property="argument"/>
+		<result column="TYPE" jdbcType="CHAR" property="type"/>
+		<result column="VAL" jdbcType="CHAR" property="val"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		ID, ARGUMENT, `TYPE`, VAL
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		<include refid="Base_Column_List"/>
+		from ARGUMENT
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!--@mbg.generated-->
+		delete
+		from ARGUMENT
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into ARGUMENT (ARGUMENT, `TYPE`, VAL)
+		values (#{argument,jdbcType=LONGVARCHAR}, #{type,jdbcType=CHAR}, #{val,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" keyColumn="ID" keyProperty="id"
+	        parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument" useGeneratedKeys="true">
+		<!--@mbg.generated-->
+		insert into ARGUMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="argument != null">
+				ARGUMENT,
+			</if>
+			<if test="type != null">
+				`TYPE`,
+			</if>
+			<if test="val != null">
+				VAL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="argument != null">
+				#{argument,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+			<if test="val != null">
+				#{val,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
+		<!--@mbg.generated-->
+		update ARGUMENT
+		<set>
+			<if test="argument != null">
+				ARGUMENT = #{argument,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				`TYPE` = #{type,jdbcType=CHAR},
+			</if>
+			<if test="val != null">
+				VAL = #{val,jdbcType=CHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loveliness.xin_guan_lun_wen_generator.entity.Argument">
+		<!--@mbg.generated-->
+		update ARGUMENT
+		set ARGUMENT = #{argument,jdbcType=LONGVARCHAR},
+		    `TYPE`   = #{type,jdbcType=CHAR},
+		    VAL      = #{val,jdbcType=CHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
 	<select id="getArgunmentByType" resultMap="BaseResultMap">
-		select ID,ARGUMENT,TYPE,VAL
+		select ID, ARGUMENT, TYPE, VAL
 		from ARGUMENT
 		where TYPE = #{type}
 		limit 1
+	</select>
+	<select id="getType" resultMap="BaseResultMap">
+		select TYPE, VAL
+		from ARGUMENT;
 	</select>
 </mapper>

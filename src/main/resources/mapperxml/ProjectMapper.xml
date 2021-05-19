@@ -113,4 +113,8 @@
 		where xiangMuType = #{xiangMu,jdbcType=VARCHAR}
 		limit 1
 	</select>
+	<select id="getAllProject" resultMap="BaseResultMap">
+		select title,xiangMuType
+		from Project
+	</select>
 </mapper>
