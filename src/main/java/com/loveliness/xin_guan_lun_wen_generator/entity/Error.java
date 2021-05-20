@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 /**
 *@author loveliness
-*@create 2021-05-16 16:25
+ *@create 2021-05-20 20:16
 */
-    
+
 /**
     * 犯下的错误
     */
@@ -19,6 +19,4 @@ public class Error {
     private Integer id;
 
     private String error;
-
-    private String type;
 }

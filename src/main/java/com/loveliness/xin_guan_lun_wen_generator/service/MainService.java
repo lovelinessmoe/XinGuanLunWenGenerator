@@ -123,7 +123,13 @@ public class MainService {
         //随机获取一条常见错误
         Error randErrorByType = null;
         while (randErrorByType == null) {
-            randErrorByType = errorMapper.getRandErrorByType(type);
+            randErrorByType = errorMapper.getRandError();
+        }
+        sumLunWen = sumLunWen.replace("ERROR", randErrorByType.getError());
+        randErrorByType = null;
+        //弄两个错误，不至于有问题
+        while (randErrorByType == null) {
+            randErrorByType = errorMapper.getRandError();
         }
         sumLunWen = sumLunWen.replace("ERROR", randErrorByType.getError());
         //FIXUP
@@ -135,6 +141,14 @@ public class MainService {
         //CONCLUSION
         Conclusion conclusion = conclusionMapper.getConclusion();
         sumLunWen = sumLunWen.replace("CONCLUSION", conclusion.getConclusion());
+
+        //TITLE
+        sumLunWen = sumLunWen.replace("TITLE", project.getTitle());
+
+        //.to。,to，
+        sumLunWen = sumLunWen.replace(".", "。");
+        sumLunWen = sumLunWen.replace(",", "，");
+
         return sumLunWen;
     }
 

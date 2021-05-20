@@ -63,8 +63,7 @@
 	</update>
 	<select id="getRandFixUp" resultMap="BaseResultMap">
 		SELECT t1.ID,
-		       t1.FIXUP,
-		       t1.TYPE
+		       t1.FIXUP
 		FROM FIXUP AS t1
 				     JOIN (
 				SELECT ROUND(

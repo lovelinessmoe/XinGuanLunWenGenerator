@@ -4,7 +4,7 @@ import com.loveliness.xin_guan_lun_wen_generator.entity.Error;
 
 /**
 *@author loveliness
-*@create 2021-05-16 16:25
+ *@create 2021-05-20 20:16
 */
 
 public interface ErrorMapper {
@@ -20,5 +20,5 @@ public interface ErrorMapper {
 
     int updateByPrimaryKey(Error record);
 
-    Error getRandErrorByType(String type);
+    Error getRandError();
 }
