@@ -34,7 +34,9 @@
             </div>
 
 
-            <textarea class="layui-textarea" id="page" required></textarea>
+            <!--<textarea class="layui-textarea" id="page" required></textarea>-->
+
+            <textarea id="page" style="display: none;"></textarea>
 
         </div>
     </form>
@@ -46,18 +48,24 @@
 <script src="../js/lay-config.js"></script>
 
 <script>
-    layui.use(['form'], function () {
+    layui.use(['form', 'layedit'], function () {
         var form = layui.form,
             layer = layui.layer,
+            layedit = layui.layedit,
             $ = layui.$;
 
+        +
+            layedit.build('page', {
+                height: 500
+            });
 
         form.on('submit(submit)', function (data) {
             data = data.field;
             console.log(data);
             $.post(layui.api.api + "submit", data, function (res) {
                 layer.msg(res.msg);
-                $("#page").append(res.data);
+                $("#page").text(res.data);
+                // $("#page").append(res.data);
                 return false;
             });
             return false;

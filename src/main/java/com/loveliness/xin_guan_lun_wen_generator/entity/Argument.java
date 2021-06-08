@@ -32,4 +32,5 @@ public class Argument {
      * 论文中文名
      */
     private String val;
+    
 }
